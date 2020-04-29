@@ -1,0 +1,25 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav [mode]="mode">
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="navbar">
+            <fa name="bars" size="lg" (click)="sidenav.toggle()"></fa>
+        </div>
+        <router-outlet name="outlet1">
+            <div *ngIf="(router.url === '/products/home')">
+                <div class="container">
+                    <div class="jumbotron">
+                        <img src="/assets/images/logo.png">
+                        <h1 class="display-4">Bluewave</h1>
+                        <p class="lead">Welcome to APA Imarisha Dashboard</p>
+                        <a routerLink="/products">
+                            <fa name="arrow-left"></fa> Choose different product
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
