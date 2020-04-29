@@ -1,0 +1,43 @@
+.jumbotron {
+    background-color: #0073BD;
+    color: white;
+}
+
+#main {
+    min-height: 40vh;
+    h4 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+    mat-accordion {
+        mat-expansion-panel {
+            border-radius: 0px;
+            margin-bottom: 30px;
+            .row {
+                margin-bottom: 10px;
+                .col-md-6 {
+                    span {
+                        font-weight: bold;
+                    }
+                }
+                button {
+                    border-radius: 0px;
+                    font-size: 13px;
+                    margin-bottom: 20px;
+                }
+            }
+            .row {
+                margin-top: 20px;
+                .card {
+                    font-family: 'Josefin Sans', sans-serif;
+                    hr {
+                        border: 1px solid black;
+                    }
+                    button {
+                        font-size: 13px;
+                        border-radius: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

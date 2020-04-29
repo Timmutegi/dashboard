@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Bluewave</h1>
+        <p class="lead">Welcome Partner...</p>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="isLoading === true">
+    <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
+</div>
+<div class="container" id="main">
+    <h4>Partner Products</h4>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let product of products">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{product.description}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{product.ussdShortCode}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="card-text"><strong>Code : </strong>{{product.productCode}}</p>
+                    <p class="card-text"><strong>Description : </strong>{{product.description}}</p>
+                    <p class="card-text"><strong>Minimum Age: </strong>{{product.minAge}}</p>
+                    <p class="card-text"><strong>Maximum Age: </strong>{{product.maxAge}}</p>
+                    <p class="card-text"><strong>Commission Rate : </strong>{{product.commissionRate}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="card-text"><strong>USSD Short Code : </strong>{{product.ussdShortCode}}</p>
+                    <p class="card-text"><strong>Bulk SMS Short Code : </strong>{{product.bulkSmsShortCode}}</p>
+                    <p class="card-text"><strong>Two Way Short Code : </strong>{{product.twoWayShortCode}}</p>
+                    <p class="card-text"><strong>Mpesa C2B Short Code : </strong>{{product.mpesaC2bShortCode}}</p>
+                    <p class="card-text"><strong>Mpesa B2C Short Code : </strong>{{product.mpesaB2cShortCode}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="card-text"><strong>WhatsApp Number : </strong>{{product.whatsAppNumber}}</p>
+                    <p class="card-text"><strong>Phone Number : </strong>{{product.helpLine.phoneNumber}}</p>
+                    <p class="card-text"><strong>Email : </strong>{{product.helpLine.email}}</p>
+                    <p class="card-text"><strong>Created At : </strong>{{product.createdAt | date: 'medium'}}</p>
+                    <p class="card-text"><strong>Lacep : </strong>{{product.lacep}}</p>
+                    <button type="button" class="btn btn-info" (click)="dashboard(product.id, product.description)">Proceed to
+                        Dashboard</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<app-footer></app-footer>
