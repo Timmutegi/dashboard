@@ -1,0 +1,42 @@
+<div class="container">
+    <h4>Messages</h4>
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> Time Sent </th>
+                <td mat-cell *matCellDef="let sms"> {{sms.sentAt | date: 'medium'}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                <td mat-cell *matCellDef="let sms"> {{sms.to}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="count">
+                <th mat-header-cell *matHeaderCellDef> SMS count </th>
+                <td mat-cell *matCellDef="let sms"> {{sms.smsCount}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let sms"> {{sms.status.groupName | titlecase}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="d-flex justify-content-center" *ngIf="isLoading === true">
+            <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+</div>
