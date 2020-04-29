@@ -1,0 +1,54 @@
+.login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eff3f4;
+    .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 23rem;
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="password"] {
+            outline: none;
+            box-shadow: none !important;
+        }
+        img {
+            height: 150px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+            margin-top: 20px;
+            input {
+                width: 20em;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                font-size: 13px;
+                border-radius: 0px;
+            }
+            .invalid-feedback {
+                margin-left: 10px;
+                font-size: 11px;
+            }
+            button {
+                border-radius: 0px;
+                font-size: 13px;
+                width: 20em;
+            }
+            p {
+                margin-top: 20px;
+                font-size: 10px;
+            }
+            p:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+}
