@@ -1,0 +1,63 @@
+<div class="container">
+    <h4>Enrolments</h4>
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource">
+            <!-- Firstname Column -->
+            <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef> Firstname </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.firstName | titlecase}} </td>
+            </ng-container>
+
+            <!-- Lastname Column -->
+            <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef> Lastname </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.lastName | titlecase}} </td>
+            </ng-container>
+
+            <!-- Phone Number Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.phoneNumber}} </td>
+            </ng-container>
+
+            <!-- National ID Column -->
+            <ng-container matColumnDef="nationalID">
+                <th mat-header-cell *matHeaderCellDef> National ID </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.nationalId}} </td>
+            </ng-container>
+
+            <!-- Enrolment Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Enrolment Date </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.enrolmentDate | date : 'shortDate'}} </td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.paymentPlan.amount}} </td>
+            </ng-container>
+
+            <!-- Payment Cycle Column -->
+            <ng-container matColumnDef="cycle">
+                <th mat-header-cell *matHeaderCellDef> Cycle </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.paymentPlan.cycle | titlecase}} </td>
+            </ng-container>
+
+            <!-- Payments Number Column -->
+            <ng-container matColumnDef="payments">
+                <th mat-header-cell *matHeaderCellDef> Payments </th>
+                <td mat-cell *matCellDef="let enrolment"> {{enrolment.paymentPlan.noOfPayments}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="d-flex justify-content-center" *ngIf="isLoading === true">
+            <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
+        </div>
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
