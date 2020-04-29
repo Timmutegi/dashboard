@@ -1,0 +1,56 @@
+.sidebar {
+    background-color: #05ADED;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 900;
+    img {
+        height: 60px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    // position: fixed;
+    h4 {
+        padding: 10px 20px 0px 30px;
+        height: 50px;
+        color: white;
+    }
+    hr {
+        border: 1px solid black;
+    }
+    .home,
+    .dashboard,
+    .customers,
+    .agents,
+    .products,
+    .claims,
+    .channels,
+    .payment,
+    .messages,
+    .commissions,
+    .enrolments {
+        padding: 10px 0px 10px 30px;
+        font-size: 13px;
+        height: 50px;
+        font-weight: bold;
+        a {
+            text-decoration: none;
+            color: white;
+            vertical-align: middle;
+            span {
+                margin-right: 15px;
+            }
+        }
+    }
+    .user {
+        color: white;
+        padding: 5px 0px 10px 30px;
+        fa {
+            margin-right: 10px;
+        }
+    }
+    .active {
+        border-right: 4px solid black !important;
+    }
+}
