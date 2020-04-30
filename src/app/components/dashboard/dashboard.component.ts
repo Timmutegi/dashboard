@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   annually: [];
   semiAnnually: [];
   commissions: [];
-  partnerID = localStorage.getItem('partnerId');
+  partnerID = localStorage.getItem('partnerProductID');
 
   constructor(private api: ApiService) { }
 
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getClaims() {
-    this.api.get(`Partners/${this.partnerID}/claims/count`).subscribe(
+    this.api.get(`PartnerProducts/${this.partnerID}/claims/count`).subscribe(
       res => {
         this.claims = res.count;
       }
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getCommissions() {
-    this.api.get(`Partners/${this.partnerID}/commissions/count`).subscribe(
+    this.api.get(`PartnerProducts/${this.partnerID}/commissions/count`).subscribe(
       res => {
         this.commissions = res.count;
       }
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getpolicyHolders() {
-    this.api.get(`Partners/${this.partnerID}/policyHolders/count`).subscribe(
+    this.api.get(`PartnerProducts/${this.partnerID}/policyHolders/count`).subscribe(
       res => {
         this.policyHolders = res.count;
       }
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAgents() {
-    this.api.get(`Partners/${this.partnerID}/agents/count`).subscribe(
+    this.api.get(`PartnerProducts/${this.partnerID}/agents/count`).subscribe(
       res => {
         this.agents = res.count;
       }
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getPolicies() {
-    this.api.get(`Partners/${this.partnerID}/policies/count`).subscribe(
+    this.api.get(`PartnerProducts/${this.partnerID}/policies/count`).subscribe(
       res => {
         this.policies = res.count;
       }
