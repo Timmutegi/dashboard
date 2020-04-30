@@ -9,6 +9,45 @@
     <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
 </div>
 <div class="container" id="main">
+    <h4>Overview</h4>
+    <div class="row mb-5">
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">Total Claims</h6>
+                    <hr>
+                    <p class="card-text"><strong>{{claims}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Policy Holders</h5>
+                    <hr>
+                    <p class="card-text"><strong>{{policyHolders}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Agents</h5>
+                    <hr>
+                    <p class="card-text"><strong>{{agents}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Policies</h5>
+                    <hr>
+                    <p class="card-text"><strong>{{policies}}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <h4>Partner Products</h4>
     <mat-accordion>
         <mat-expansion-panel *ngFor="let product of products">
