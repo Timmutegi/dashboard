@@ -14,7 +14,12 @@ export class ProductsComponent implements OnInit {
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['name', 'phone', 'status', 'policy', 'beneficiaryName', 'beneficiaryPhone', 'createdAt', 'actions'];
   products: [];
-  ID: string;
+  partnerID: string;
+  claims: [];
+  agents: [];
+  policyHolders: [];
+  policies: [];
+  partnerProducts: [];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -29,10 +34,12 @@ export class ProductsComponent implements OnInit {
   getUser() {
     this.api.get('PartnerAdmins/me').subscribe(
       res => {
+        this.partnerID = res.partnerId;
         this.api.get(`Partners/${res.partnerId}/partnerProducts`).subscribe(
           response => {
           console.log(response);
           this.products = response;
+          this.getInfo();
           this.isLoading = false;
         },
         err => {
@@ -45,10 +52,38 @@ export class ProductsComponent implements OnInit {
     );
   }
 
+  getInfo() {
+    this.api.get(`Partners/${this.partnerID}/agents/count`).subscribe((res) => {
+      console.log(res);
+      this.agents = res.count;
+    });
+
+    this.api.get(`Partners/${this.partnerID}/claims/count`).subscribe((res) => {
+      console.log(res);
+      this.claims = res.count;
+    });
+
+    this.api.get(`Partners/${this.partnerID}/policyHolders/count`).subscribe(
+      res => {
+        console.log(res);
+        this.policyHolders = res.count;
+    });
+
+    this.api.get(`Partners/${this.partnerID}/policies/count`).subscribe(
+      res => {
+        console.log(res);
+        this.policies = res.count;
+    });
+
+    this.api.get(`Partners/${this.partnerID}/partnerProducts/count`).subscribe((res) => {
+      console.log(res);
+      this.partnerProducts = res.count;
+    });
+  }
+
   dashboard(ID: string, description: string) {
     localStorage.setItem('partnerProductID', ID);
     console.log(ID, description);
     this.router.navigate(['/products/home']);
   }
-
 }
