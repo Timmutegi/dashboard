@@ -4,7 +4,23 @@
 }
 
 #main {
-    min-height: 40vh;
+    min-height: 60vh;
+    .row {
+        margin-top: 20px;
+        font-family: 'Josefin Sans', sans-serif;
+        .card {
+            hr {
+                border: 1px solid black;
+            }
+            .card-title {
+                font-size: 11px;
+            }
+            .card-text {
+                font-size: 20px;
+                color: #0073BD;
+            }
+        }
+    }
     h4 {
         font-family: 'Josefin Sans', sans-serif;
     }
@@ -23,19 +39,6 @@
                     border-radius: 0px;
                     font-size: 13px;
                     margin-bottom: 20px;
-                }
-            }
-            .row {
-                margin-top: 20px;
-                .card {
-                    font-family: 'Josefin Sans', sans-serif;
-                    hr {
-                        border: 1px solid black;
-                    }
-                    button {
-                        font-size: 13px;
-                        border-radius: 0px;
-                    }
                 }
             }
         }
