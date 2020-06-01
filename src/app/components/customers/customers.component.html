@@ -1,8 +1,17 @@
 <div class="container">
     <h4>Policy Holders</h4>
     <div class="mat-elevation-z8">
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="John Doe">
+        </mat-form-field>
 
         <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef> No </th>
+                <td mat-cell *matCellDef="let customer; let i = index;"> {{i+1}} </td>
+            </ng-container>
+
             <!-- Name Column -->
             <ng-container matColumnDef="firstname">
                 <th mat-header-cell *matHeaderCellDef> Firstname </th>

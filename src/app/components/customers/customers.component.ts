@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
 export class CustomersComponent implements OnInit {
   isLoading = true;
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['firstname', 'lastname', 'phone', 'nationalID', 'createdAt', 'actions'];
+  displayedColumns: string[] = ['serial', 'firstname', 'lastname', 'phone', 'nationalID', 'createdAt', 'actions'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -20,6 +20,11 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.getCustomers();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getCustomers() {
