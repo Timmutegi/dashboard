@@ -10,7 +10,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class ClaimsComponent implements OnInit {
   isLoading = true;
-  displayedColumns: string[] = ['status', 'processingHours', 'amount', 'benefit', 'createdAt'];
+  displayedColumns: string[] = ['index', 'status', 'processingHours', 'amount', 'benefit', 'createdAt'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -20,6 +20,11 @@ export class ClaimsComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.getClaims();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getClaims() {
