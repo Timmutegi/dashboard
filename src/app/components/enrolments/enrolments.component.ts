@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
 export class EnrolmentsComponent implements OnInit {
   isLoading = true;
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['firstname', 'lastname', 'nationalID', 'phone', 'date', 'amount', 'cycle', 'payments'];
+  displayedColumns: string[] = ['index', 'firstname', 'lastname', 'nationalID', 'phone', 'date', 'amount', 'cycle', 'payments'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -23,6 +23,11 @@ export class EnrolmentsComponent implements OnInit {
     this.getEnrolments();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   getEnrolments() {
     this.api.get('Enrolments?filter={"include":"policyHolder"}').subscribe(
       res => {
@@ -31,14 +36,6 @@ export class EnrolmentsComponent implements OnInit {
         this.dataSource.data = res;
       }
     );
-    // const ID = localStorage.getItem('partnerProductID');
-    // this.api.get(`PartnerProducts/${ID}/policies`).subscribe(
-    //   res => {
-    //     console.log(res);
-    //     this.isLoading = false;
-    //     this.dataSource.data = res;
-    //   }
-    // );
   }
 
 }
