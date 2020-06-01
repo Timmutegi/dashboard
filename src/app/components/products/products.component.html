@@ -56,7 +56,7 @@
                     {{product.description}}
                 </mat-panel-title>
                 <mat-panel-description>
-                    {{product.ussdShortCode}}
+                    <button type="button" class="btn btn-info" (click)="dashboard(product.id, product.description)">Dashboard <fa name="arrow-right"></fa></button>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row">

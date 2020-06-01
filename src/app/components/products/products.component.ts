@@ -37,7 +37,6 @@ export class ProductsComponent implements OnInit {
         this.partnerID = res.partnerId;
         this.api.get(`Partners/${res.partnerId}/partnerProducts`).subscribe(
           response => {
-          console.log(response);
           this.products = response;
           this.getInfo();
           this.isLoading = false;
@@ -54,36 +53,30 @@ export class ProductsComponent implements OnInit {
 
   getInfo() {
     this.api.get(`Partners/${this.partnerID}/agents/count`).subscribe((res) => {
-      console.log(res);
       this.agents = res.count;
     });
 
     this.api.get(`Partners/${this.partnerID}/claims/count`).subscribe((res) => {
-      console.log(res);
       this.claims = res.count;
     });
 
     this.api.get(`Partners/${this.partnerID}/policyHolders/count`).subscribe(
       res => {
-        console.log(res);
         this.policyHolders = res.count;
     });
 
     this.api.get(`Partners/${this.partnerID}/policies/count`).subscribe(
       res => {
-        console.log(res);
         this.policies = res.count;
     });
 
     this.api.get(`Partners/${this.partnerID}/partnerProducts/count`).subscribe((res) => {
-      console.log(res);
       this.partnerProducts = res.count;
     });
   }
 
   dashboard(ID: string, description: string) {
     localStorage.setItem('partnerProductID', ID);
-    console.log(ID, description);
     this.router.navigate(['/products/home']);
   }
 }

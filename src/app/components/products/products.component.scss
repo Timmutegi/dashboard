@@ -28,17 +28,16 @@
         mat-expansion-panel {
             border-radius: 0px;
             margin-bottom: 30px;
+            button {
+                border-radius: 0px;
+                font-size: 13px;
+            }
             .row {
                 margin-bottom: 10px;
                 .col-md-6 {
                     span {
                         font-weight: bold;
                     }
-                }
-                button {
-                    border-radius: 0px;
-                    font-size: 13px;
-                    margin-bottom: 20px;
                 }
             }
         }
