@@ -54,6 +54,11 @@ const routes: Routes = [
         path: 'payments',
         component: PaymentsComponent,
         outlet: 'outlet1'
+      },
+      {
+        path: 'sms-logs',
+        component: MessagesComponent,
+        outlet: 'outlet1'
       }
 
     ],
