@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
 export class EnrolmentsComponent implements OnInit {
   isLoading = true;
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['index', 'firstname', 'lastname', 'nationalID', 'phone', 'date', 'amount', 'cycle', 'payments'];
+  displayedColumns: string[] = ['index', 'firstname', 'lastname', 'phone', 'nationalID', 'date', 'amount', 'cycle', 'payments'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -26,6 +26,7 @@ export class EnrolmentsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue);
   }
 
   getEnrolments() {
