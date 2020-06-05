@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { ErrorHandlingService } from '../../services/error-handling.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,14 @@ import { ApiService } from '../../services/api.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
+  isLoading: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private api: ApiService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private api: ApiService,
+    private errorHandler: ErrorHandlingService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -31,16 +38,18 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.isLoading = true;
 
     this.api.login('PartnerAdmins/login', this.loginForm.value).subscribe(
       res => {
-        console.log(res);
         localStorage.setItem('token', res.id);
         localStorage.setItem('ttl', res.ttl);
         this.router.navigate(['/products']);
+        this.isLoading = false;
       },
       err => {
-        alert(err);
+        this.isLoading = false;
+        this.errorHandler.handleError(err);
       }
     );
   }
