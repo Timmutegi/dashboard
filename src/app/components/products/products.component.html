@@ -1,10 +1,11 @@
-<app-navbar></app-navbar>
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid" [ngStyle]="{'background-color': brandColor}">
     <div class="container">
-        <h1 class="display-4">Bluewave</h1>
-        <p class="lead">Welcome Partner...</p>
+        <img *ngIf="logo" src="{{logo}}">
+        <button (click)="logout()" type="button" class="btn btn-primary" [ngStyle]="{'background-color': brandColor}">Logout <fa name="sign-out"></fa></button>
+        <h1 class="display-4">{{name}}</h1>
     </div>
 </div>
+
 <div class="d-flex justify-content-center" *ngIf="isLoading === true">
     <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
 </div>
@@ -56,7 +57,7 @@
                     {{product.description}}
                 </mat-panel-title>
                 <mat-panel-description>
-                    <button type="button" class="btn btn-info" (click)="dashboard(product.id, product.description)">Dashboard <fa name="arrow-right"></fa></button>
+                    <button type="button" class="btn btn-info" (click)="dashboard(product.id, product.description)" [ngStyle]="{'background-color': brandColor}">Dashboard <fa name="arrow-right"></fa></button>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="row">
@@ -85,4 +86,11 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
-<app-footer></app-footer>
+<div class="footer" [ngStyle]="{'background-color': brandColor}">
+    <div class="container">
+
+        <p>Bluewave Partner's Portal.</p>
+        <hr>
+        <p style="font-size: 12px;">Bluewave &copy; &nbsp; All Rights Reserved.</p>
+    </div>
+</div>

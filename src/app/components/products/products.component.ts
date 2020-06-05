@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { ErrorHandlingService } from '../../services/error-handling.service';
 
 @Component({
   selector: 'app-products',
@@ -11,68 +10,90 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   isLoading = true;
-  dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['name', 'phone', 'status', 'policy', 'beneficiaryName', 'beneficiaryPhone', 'createdAt', 'actions'];
   products: [];
-  partnerID: string;
   claims: [];
   agents: [];
   policyHolders: [];
   policies: [];
   partnerProducts: [];
+  name: string;
+  logo: string;
+  brandColor: string;
+  partnerID: string;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private errorHandler: ErrorHandlingService) { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
     this.getUser();
   }
 
   getUser() {
     this.api.get('PartnerAdmins/me').subscribe(
       res => {
-        this.partnerID = res.partnerId;
-        this.api.get(`Partners/${res.partnerId}/partnerProducts`).subscribe(
-          response => {
-          this.products = response;
-          this.getInfo();
-          this.isLoading = false;
-        },
-        err => {
-          alert(err);
-        });
+        this.getPartnerProducts(res.partnerId);
+        this.getAdminProfile(res.partnerId);
       },
       err => {
-        alert(err);
+        this.isLoading = false;
+        this.errorHandler.handleError(err);
       }
     );
   }
 
-  getInfo() {
-    this.api.get(`Partners/${this.partnerID}/agents/count`).subscribe((res) => {
+  getAdminProfile(partnerID: string) {
+    this.api.get(`Partners/${partnerID}`).subscribe(
+      res => {
+        this.name = res.name;
+        this.logo = res.logo;
+        this.brandColor = res.styles.color;
+        localStorage.setItem('admin', JSON.stringify(res));
+      },
+      err => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  getPartnerProducts(partnerID: string) {
+    console.log(partnerID);
+    this.api.get(`Partners/${partnerID}/partnerProducts`).subscribe(
+      response => {
+        this.products = response;
+        this.getInfo(partnerID);
+        this.isLoading = false;
+      },
+      err => {
+        this.errorHandler.handleError(err);
+      });
+  }
+
+  getInfo(partnerID: string) {
+    this.api.get(`Partners/${partnerID}/agents/count`).subscribe((res) => {
       this.agents = res.count;
     });
 
-    this.api.get(`Partners/${this.partnerID}/claims/count`).subscribe((res) => {
+    this.api.get(`Partners/${partnerID}/claims/count`).subscribe((res) => {
       this.claims = res.count;
     });
 
-    this.api.get(`Partners/${this.partnerID}/policyHolders/count`).subscribe(
+    this.api.get(`Partners/${partnerID}/policyHolders/count`).subscribe(
       res => {
         this.policyHolders = res.count;
     });
 
-    this.api.get(`Partners/${this.partnerID}/policies/count`).subscribe(
+    this.api.get(`Partners/${partnerID}/policies/count`).subscribe(
       res => {
         this.policies = res.count;
     });
 
-    this.api.get(`Partners/${this.partnerID}/partnerProducts/count`).subscribe((res) => {
+    this.api.get(`Partners/${partnerID}/partnerProducts/count`).subscribe((res) => {
       this.partnerProducts = res.count;
     });
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 
   dashboard(ID: string, description: string) {
