@@ -16,15 +16,10 @@ import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: '', component: LoginComponent },
-  { path: 'products/home', component: HomeComponent, canActivate: [AuthGuard],
+  { path: 'home/dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
-      {
-      path: 'dashboard',
-      component: DashboardComponent,
-      outlet: 'outlet1'
-      },
       {
         path: 'policy-holders',
         component: CustomersComponent,
