@@ -1,17 +1,35 @@
-.container {
-    font-family: 'Josefin Sans', sans-serif;
-    .row {
-        margin-top: 20px;
-        .card {
-            hr {
-                border: 1px solid black;
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    mat-sidenav {
+        width: 200px;
+    }
+    mat-sidenav-content {
+        .navbar {
+            height: 15vh;
+            fa:hover {
+                cursor: pointer;
             }
-            .card-title {
-                font-size: 11px;
-            }
-            .card-text {
-                font-size: 20px;
-                color: #0073BD;
+        }
+        .container {
+            font-family: 'Josefin Sans', sans-serif;
+            .row {
+                margin-top: 20px;
+                .card {
+                    hr {
+                        border: 1px solid black;
+                    }
+                    .card-title {
+                        font-size: 11px;
+                    }
+                    .card-text {
+                        font-size: 20px;
+                        color: #0073BD;
+                    }
+                }
             }
         }
     }

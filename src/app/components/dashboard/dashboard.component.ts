@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,8 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  mode = 'push';
+  opened: true;
   claims: [];
   policyHolders: [];
   agents: [];
@@ -17,7 +20,7 @@ export class DashboardComponent implements OnInit {
   commissions: [];
   partnerID = localStorage.getItem('partnerProductID');
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, public router: Router) { }
 
   ngOnInit() {
     this.getClaims();
