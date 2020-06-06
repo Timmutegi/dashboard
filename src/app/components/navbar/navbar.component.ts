@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   status: string;
+  brandColor: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.status = localStorage.getItem('token');
+    this.brandColor = JSON.parse(localStorage.getItem('admin')).styles.color;
+    console.log(this.brandColor);
   }
 
   clickMenu() {
@@ -23,10 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('ttl');
-    localStorage.removeItem('partnerId');
-    localStorage.removeItem('partnerProductID');
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 
