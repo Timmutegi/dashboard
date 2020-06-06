@@ -1,37 +1,30 @@
-<div class="sidebar">
-    <img src="/assets/images/logo.png">
-    <!-- <h4>Bluewave Patners Dashboard</h4> -->
+<div class="sidebar" [ngStyle]="{'background-color': brandColor}">
+    <img src="{{logo}}">
     <hr>
-    <div class="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a class="link" routerLink="/products/home"><span><fa name="home"></fa></span>HOME</a>
-    </div>
-    <div class="dashboard" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['dashboard']}}]"><span><fa name="tachometer"></fa></span>DASHBOARD</a>
+    <div class="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="link" routerLink="/home/dashboard"><span><fa name="home"></fa></span>DASHBOARD</a>
     </div>
     <div class="customers" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['policy-holders']}}]"><span><fa name="user"></fa></span>POLICY HOLDERS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['policy-holders']}}]"><span><fa name="user"></fa></span>POLICY HOLDERS</a>
     </div>
     <div class="enrolments" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['enrolments']}}]"><span><fa name="user"></fa></span>ENROLMENTS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['enrolments']}}]"><span><fa name="user"></fa></span>ENROLMENTS</a>
     </div>
     <div class="agents" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['agents']}}]"><span><fa name="users"></fa></span>AGENTS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['agents']}}]"><span><fa name="users"></fa></span>AGENTS</a>
     </div>
     <div class="commissions" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['commissions']}}]"><span><fa name="user"></fa></span>COMMISSIONS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['commissions']}}]"><span><fa name="user"></fa></span>COMMISSIONS</a>
     </div>
     <div class="claims" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['claims']}}]"><span><fa name="file"></fa></span>CLAIMS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['claims']}}]"><span><fa name="file"></fa></span>CLAIMS</a>
     </div>
     <div class="payment" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['payments']}}]"><span><fa name="money"></fa></span>PAYMENT LOGS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['payments']}}]"><span><fa name="money"></fa></span>PAYMENT LOGS</a>
     </div>
     <div class="messages" routerLinkActive="active">
-        <a class="link" [routerLink]="['/products/home', {outlets: {outlet1: ['sms-logs']}}]"><span><fa name="money"></fa></span>SMS LOGS</a>
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['sms-logs']}}]"><span><fa name="money"></fa></span>SMS LOGS</a>
     </div>
     <hr>
-    <div class="user">
-        <fa name="user-circle" size="lg"></fa>
-        <fa name="caret-down" size="lg"></fa>
-    </div>
+    <button routerLink="/home" type="button" class="btn btn-primary" [ngStyle]="{'background-color': brandColor}"><fa name="arrow-left"></fa> Back Home </button>
 </div>
