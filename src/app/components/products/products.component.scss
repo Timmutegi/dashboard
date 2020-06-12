@@ -17,6 +17,7 @@
     min-height: 60vh;
     .row {
         margin-top: 20px;
+        padding-bottom: 50px;
         font-family: 'Josefin Sans', sans-serif;
         .card {
             hr {
@@ -41,6 +42,9 @@
             button {
                 border-radius: 0px;
                 font-size: 13px;
+                outline: none !important;
+                box-shadow: none !important;
+                border: 0px;
             }
             .row {
                 margin-bottom: 10px;
