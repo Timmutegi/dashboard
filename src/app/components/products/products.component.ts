@@ -34,6 +34,7 @@ export class ProductsComponent implements OnInit {
         this.getAdminProfile(res.partnerId);
       },
       err => {
+        // console.log(err);
         this.isLoading = false;
         this.errorHandler.handleError(err);
       }
@@ -58,6 +59,7 @@ export class ProductsComponent implements OnInit {
     console.log(partnerID);
     this.api.get(`Partners/${partnerID}/partnerProducts`).subscribe(
       response => {
+        console.log(response);
         this.products = response;
         this.getInfo(partnerID);
         this.isLoading = false;
@@ -98,6 +100,7 @@ export class ProductsComponent implements OnInit {
 
   dashboard(ID: string, description: string) {
     localStorage.setItem('partnerProductID', ID);
-    this.router.navigate(['/products/home']);
+    localStorage.setItem('description', description);
+    this.router.navigate(['/home/dashboard']);
   }
 }
