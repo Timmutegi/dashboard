@@ -18,6 +18,7 @@
                     </mat-form-field>
                 </div>
                 <button type="button" class="btn btn-primary" (click)="applyFilter1()">Filter</button>
+                <button type="button" class="btn btn-info" (click)="reset()"><fa name="retweet"></fa></button>
                 <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Policy Holders'})">Excel <fa name="download"></fa></button>
             </div>
         </form>

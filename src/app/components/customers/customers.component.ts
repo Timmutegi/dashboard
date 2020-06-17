@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { FormGroup, FormControl } from '@angular/forms';
 
 export interface Data {
   createdAt: Date;
@@ -18,7 +17,6 @@ const ELEMENT_DATA: Data[] = [];
 })
 export class CustomersComponent implements OnInit {
   isLoading = true;
-  pipe: DatePipe;
   minDate: Date;
   maxDate: Date;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -30,13 +28,12 @@ export class CustomersComponent implements OnInit {
   });
 
   get fromDate() {
-    let fromDate = this.filterForm.get('fromDate').value;
-    fromDate = this.pipe.transform(fromDate, 'shortDate');
+    const fromDate = new Date(this.filterForm.get('fromDate').value);
     return fromDate;
   }
   get toDate() {
-    let toDate = this.filterForm.get('toDate').value;
-    toDate = this.pipe.transform(toDate, 'shortDate');
+    const toDate = new Date(this.filterForm.get('toDate').value);
+    toDate.setDate(toDate.getDate() + 1);
     return toDate;
   }
 
@@ -63,17 +60,21 @@ export class CustomersComponent implements OnInit {
   }
 
   getCustomers() {
-    this.pipe = new DatePipe('en');
     const ID = localStorage.getItem('partnerProductID');
     this.api.get(`PartnerProducts/${ID}/policyHolders`).subscribe(
       res => {
-        res.forEach((element: { createdAt: string; }) => {
-          element.createdAt = this.pipe.transform(element.createdAt, 'shortDate' );
+        res.forEach((element: { createdAt: Date; }) => {
+          element.createdAt = new Date(element.createdAt);
         });
         this.isLoading = false;
         this.dataSource.data = res;
       }
     );
+  }
+
+  reset() {
+    this.filterForm.reset();
+    this.dataSource.filter = '';
   }
 
 }
