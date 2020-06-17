@@ -1,13 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatInputModule,
+import {
+  MatDatepickerModule,
+  MatInputModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule,
   MatExpansionModule,
+  MatNativeDateModule,
   MatSidenavModule} from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,8 +60,11 @@ import { FooterComponent } from './components/footer/footer.component';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDatepickerModule,
     MatSortModule,
     MatExpansionModule,
+    MatNativeDateModule,
+    MatTableExporterModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
     ReactiveFormsModule,
