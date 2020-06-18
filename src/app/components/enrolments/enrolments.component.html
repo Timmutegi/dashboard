@@ -1,12 +1,32 @@
 <div class="container">
     <h4>Enrolments</h4>
     <div class="mat-elevation-z8">
-        <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="John Doe">
-        </mat-form-field>
+        <form [formGroup]="filterForm">
+            <div class="date-block">
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="fromDate" placeholder="From Date" formControlName="fromDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="toDate" placeholder="To Date" formControlName="toDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                        <mat-datepicker #toDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="applyFilter1()">Filter</button>
+                <button type="button" class="btn btn-info" (click)="reset()">
+                    <fa name="retweet"></fa>
+                </button>
+                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Enrolments'})">Excel <fa
+                        name="download"></fa></button>
+            </div>
+        </form>
 
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0]">
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> No </th>
                 <td mat-cell *matCellDef="let enrolment; let i = index;"> {{i+1}} </td>
@@ -14,13 +34,13 @@
 
             <!-- Firstname Column -->
             <ng-container matColumnDef="firstname">
-                <th mat-header-cell *matHeaderCellDef> Firstname </th>
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
                 <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.firstName | titlecase}} </td>
             </ng-container>
 
             <!-- Lastname Column -->
             <ng-container matColumnDef="lastname">
-                <th mat-header-cell *matHeaderCellDef> Lastname </th>
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
                 <td mat-cell *matCellDef="let enrolment"> {{enrolment.policyHolder.lastName | titlecase}} </td>
             </ng-container>
 
@@ -67,6 +87,6 @@
         <div class="d-flex justify-content-center" *ngIf="isLoading === true">
             <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
         </div>
-        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

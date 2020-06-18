@@ -2,6 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
+import { FormGroup, FormControl } from '@angular/forms';
+
+export interface Data {
+  enrolmentDate: Date;
+}
+
+const ELEMENT_DATA: Data[] = [];
 
 @Component({
   selector: 'app-enrolments',
@@ -10,8 +17,25 @@ import { ApiService } from '../../services/api.service';
 })
 export class EnrolmentsComponent implements OnInit {
   isLoading = true;
-  dataSource = new MatTableDataSource();
+  minDate: Date;
+  maxDate: Date;
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
   displayedColumns: string[] = ['index', 'firstname', 'lastname', 'phone', 'nationalID', 'date', 'amount', 'cycle', 'payments'];
+
+  filterForm = new FormGroup({
+    fromDate: new FormControl(),
+    toDate: new FormControl(),
+  });
+
+  get fromDate() {
+    const fromDate = new Date(this.filterForm.get('fromDate').value);
+    return fromDate;
+  }
+  get toDate() {
+    const toDate = new Date(this.filterForm.get('toDate').value);
+    toDate.setDate(toDate.getDate() + 1);
+    return toDate;
+  }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -21,22 +45,36 @@ export class EnrolmentsComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.getEnrolments();
+    this.maxDate = new Date();
+    this.minDate = new Date(2019, 0, 1);
+    this.dataSource.filterPredicate = (data, filter) => {
+      if (this.fromDate && this.toDate) {
+        return data.enrolmentDate >= this.fromDate && data.enrolmentDate <= this.toDate;
+      }
+      return true;
+    };
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue);
+  applyFilter1() {
+    this.dataSource.filter = '' + Math.random();
   }
 
   getEnrolments() {
     this.api.get('Enrolments?filter={"include":"policyHolder"}').subscribe(
       res => {
+        res.forEach((element: { enrolmentDate: string | number | Date; }) => {
+          element.enrolmentDate = new Date(element.enrolmentDate);
+        });
         console.log(res);
         this.isLoading = false;
         this.dataSource.data = res;
       }
     );
+  }
+
+  reset() {
+    this.filterForm.reset();
+    this.dataSource.filter = '';
   }
 
 }
