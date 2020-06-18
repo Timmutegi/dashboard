@@ -1,11 +1,32 @@
 <div class="container">
     <h4>Commissions</h4>
     <div class="mat-elevation-z8">
-        <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="John Doe">
-        </mat-form-field>
-        <table mat-table [dataSource]="dataSource">
+        <form [formGroup]="filterForm">
+            <div class="date-block">
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="fromDate" placeholder="From Date" formControlName="fromDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="toDate" placeholder="To Date" formControlName="toDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                        <mat-datepicker #toDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="applyFilter1()">Filter</button>
+                <button type="button" class="btn btn-info" (click)="reset()">
+                    <fa name="retweet"></fa>
+                </button>
+                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Commissions'})">Excel 
+                    <fa name="download"></fa>
+                </button>
+            </div>
+        </form>
+        <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0]">
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> No </th>
                 <td mat-cell *matCellDef="let commission; let i = index;"> {{i+1}} </td>
@@ -32,7 +53,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let commission"> {{commission.createdAt | date: 'medium'}} </td>
+                <td mat-cell *matCellDef="let commission"> {{commission.createdAt | date: 'shortDate'}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -43,7 +64,7 @@
             <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
         </div>
 
-        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </div>
 
 </div>
