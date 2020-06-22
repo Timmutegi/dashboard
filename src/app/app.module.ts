@@ -12,12 +12,12 @@ import {
   MatSidenavModule} from '@angular/material';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomersComponent } from './components/customers/customers.component';
 import { ClaimsComponent } from './components/claims/claims.component';
@@ -39,7 +39,6 @@ import { FooterComponent } from './components/footer/footer.component';
     AppComponent,
     DashboardComponent,
     SidebarComponent,
-    HomeComponent,
     CustomersComponent,
     ClaimsComponent,
     NavbarComponent,
@@ -69,7 +68,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatSidenavModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
