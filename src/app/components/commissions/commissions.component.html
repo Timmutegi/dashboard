@@ -32,15 +32,39 @@
                 <td mat-cell *matCellDef="let commission; let i = index;"> {{i+1}} </td>
             </ng-container>
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="agent">
-                <th mat-header-cell *matHeaderCellDef> Agent ID </th>
-                <td mat-cell *matCellDef="let commission"> {{commission.agentId}} </td>
+            <!-- FirstnameColumn -->
+            <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let commission"> {{commission.agent.firstName | titlecase}} </td>
             </ng-container>
 
-            <!-- Name Column -->
+            <!-- Lastname Column -->
+            <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let commission"> {{commission.agent.lastName | titlecase}} </td>
+            </ng-container>
+
+            <!-- Phone Number Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let commission"> {{commission.agent.phoneNumber}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let commission"> {{commission.agent.email}} </td>
+            </ng-container>
+
+            <!-- Lastname Column -->
+            <ng-container matColumnDef="code">
+                <th mat-header-cell *matHeaderCellDef> Agent Code </th>
+                <td mat-cell *matCellDef="let commission"> {{commission.agent.code}} </td>
+            </ng-container>
+
+            <!-- Amount Column -->
             <ng-container matColumnDef="amount">
-                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <th mat-header-cell *matHeaderCellDef> amount </th>
                 <td mat-cell *matCellDef="let commission"> {{commission.amount}} </td>
             </ng-container>
 

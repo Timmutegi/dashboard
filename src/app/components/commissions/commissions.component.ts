@@ -20,7 +20,7 @@ export class CommissionsComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  displayedColumns: string[] = ['index', 'agent', 'amount', 'paid', 'date'];
+  displayedColumns: string[] = ['index', 'firstname', 'lastname', 'phone', 'email', 'code', 'amount', 'paid', 'date'];
 
   filterForm = new FormGroup({
     fromDate: new FormControl(),
@@ -60,15 +60,16 @@ export class CommissionsComponent implements OnInit {
 
   getCommissions() {
     const ID = localStorage.getItem('partnerProductID');
-    this.api.get(`PartnerProducts/${ID}/commissions`).subscribe(
-      res => {
-        res.forEach((element: { createdAt: string | number | Date; }) => {
+    this.api
+      .get(`PartnerProducts/${ID}/commissions?filter[include]=agent`)
+      .subscribe((res) => {
+        res.forEach((element: { createdAt: string | number | Date }) => {
           element.createdAt = new Date(element.createdAt);
         });
+        console.log(res);
         this.isLoading = false;
         this.dataSource.data = res;
-      }
-    );
+      });
   }
 
   reset() {
