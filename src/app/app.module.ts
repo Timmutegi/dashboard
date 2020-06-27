@@ -24,15 +24,16 @@ import { ClaimsComponent } from './components/claims/claims.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AgentsComponent } from './components/agents/agents.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ChannelsComponent } from './components/channels/channels.component';
-import { PaymentsComponent } from './components/payments/payments.component';
-import { MessagesComponent } from './components/messages/messages.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EnrolmentsComponent } from './components/enrolments/enrolments.component';
 import { CommissionsComponent } from './components/commissions/commissions.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PolicyholderschartComponent } from './components/policyholderschart/policyholderschart.component';
+import { DatePipe } from '@angular/common';
+import { UssdSessionsComponent } from './components/ussd-sessions/ussd-sessions.component';
+import { PoliciesComponent } from './components/policies/policies.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,13 @@ import { FooterComponent } from './components/footer/footer.component';
     NavbarComponent,
     AgentsComponent,
     ProductsComponent,
-    ChannelsComponent,
-    PaymentsComponent,
-    MessagesComponent,
     LoginComponent,
     EnrolmentsComponent,
     CommissionsComponent,
-    FooterComponent
+    FooterComponent,
+    PolicyholderschartComponent,
+    UssdSessionsComponent,
+    PoliciesComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +72,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
