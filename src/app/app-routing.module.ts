@@ -5,14 +5,12 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { AgentsComponent } from './components/agents/agents.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ChannelsComponent } from './components/channels/channels.component';
-import { PaymentsComponent } from './components/payments/payments.component';
-import { MessagesComponent } from './components/messages/messages.component';
 import { EnrolmentsComponent } from './components/enrolments/enrolments.component';
 import { CommissionsComponent } from './components/commissions/commissions.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+import { UssdSessionsComponent } from './components/ussd-sessions/ussd-sessions.component';
+import { PoliciesComponent } from './components/policies/policies.component';
 
 
 const routes: Routes = [
@@ -46,16 +44,15 @@ const routes: Routes = [
         outlet: 'outlet1'
       },
       {
-        path: 'payments',
-        component: PaymentsComponent,
+        path: 'policies',
+        component: PoliciesComponent,
         outlet: 'outlet1'
       },
       {
-        path: 'sms-logs',
-        component: MessagesComponent,
+        path: 'ussd-sessions',
+        component: UssdSessionsComponent,
         outlet: 'outlet1'
-      }
-
+      },
     ],
   }
 ];
