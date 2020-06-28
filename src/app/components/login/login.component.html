@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <p>Forgot your password?</p>
-                <button type="submit" class="btn btn-info" (click)="login()">Login
+                <button type="submit" class="btn btn-info" [disabled]="isLoading" (click)="login()">Login
                     <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 </button>
             </form>
