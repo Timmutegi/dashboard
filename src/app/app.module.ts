@@ -19,14 +19,13 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomersComponent } from './components/customers/customers.component';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AgentsComponent } from './components/agents/agents.component';
 import { ProductsComponent } from './components/products/products.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnrolmentsComponent } from './components/enrolments/enrolments.component';
 import { CommissionsComponent } from './components/commissions/commissions.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -34,13 +33,13 @@ import { PolicyholderschartComponent } from './components/policyholderschart/pol
 import { DatePipe } from '@angular/common';
 import { UssdSessionsComponent } from './components/ussd-sessions/ussd-sessions.component';
 import { PoliciesComponent } from './components/policies/policies.component';
+import { HttpErrorInterceptor } from './interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SidebarComponent,
-    CustomersComponent,
     ClaimsComponent,
     NavbarComponent,
     AgentsComponent,
@@ -72,7 +71,12 @@ import { PoliciesComponent } from './components/policies/policies.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+     {
+     provide: HTTP_INTERCEPTORS,
+     useClass: HttpErrorInterceptor,
+     multi: true
+   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
