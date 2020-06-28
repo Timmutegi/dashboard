@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   annually: [];
   semiAnnually: [];
   commissions: [];
+  ussdSessions: [];
   partnerID = localStorage.getItem('partnerProductID');
 
   constructor(private api: ApiService, public router: Router) { }
@@ -28,9 +29,7 @@ export class DashboardComponent implements OnInit {
     this.getAgents();
     this.getPolicies();
     this.getCommissions();
-    this.getMonthly();
-    this.getSemiAnnually();
-    this.getAnnually();
+    this.getUssd();
   }
 
   getClaims() {
@@ -73,27 +72,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getMonthly() {
-    this.api.get('enrolments?filter={"where":{"paymentPlan.cycle":"MONTHLY"}}').subscribe(
+  getUssd() {
+    this.api.get(`PartnerProducts/${this.partnerID}/ussdSessions/count`).subscribe(
       res => {
-        this.monthly = res.length;
+        this.ussdSessions = res.count;
       }
     );
-  }
-
-  getAnnually() {
-     this.api.get('enrolments?filter={"where":{"paymentPlan.cycle":"ANNUALLY"}}').subscribe(
-      res => {
-        this.annually = res.length;
-      }
-    );
-  }
-
-  getSemiAnnually() {
-     this.api
-       .get('enrolments?filter={"where":{"paymentPlan.cycle":"SEMI_ANUALLY"}}').subscribe(res => {
-         this.semiAnnually = res.length;
-       });
-
   }
 }
