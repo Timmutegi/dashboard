@@ -21,7 +21,7 @@
     .products,
     .claims,
     .channels,
-    .payment,
+    .policies,
     .messages,
     .commissions,
     .USSD,
@@ -35,6 +35,8 @@
             color: white;
             vertical-align: middle;
             border: 0px;
+            border: none;
+            outline: none !important;
             span {
                 margin-right: 15px;
             }

@@ -4,9 +4,6 @@
     <div class="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a class="link" routerLink="/home/dashboard"><span><fa name="home"></fa></span>DASHBOARD</a>
     </div>
-    <div class="customers" routerLinkActive="active">
-        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['policy-holders']}}]"><span><fa name="user"></fa></span>POLICY HOLDERS</a>
-    </div>
     <div class="enrolments" routerLinkActive="active">
         <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['enrolments']}}]"><span><fa name="user"></fa></span>ENROLMENTS</a>
     </div>
@@ -19,11 +16,15 @@
     <div class="claims" routerLinkActive="active">
         <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['claims']}}]"><span><fa name="file"></fa></span>CLAIMS</a>
     </div>
-    <div class="payment" routerLinkActive="active">
-        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['payments']}}]"><span><fa name="money"></fa></span>PAYMENT LOGS</a>
+    <div class="policies" routerLinkActive="active">
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['policies']}}]"><span><fa name="sticky-note"></fa></span>POLICIES</a>
     </div>
-    <div class="messages" routerLinkActive="active">
-        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['sms-logs']}}]"><span><fa name="money"></fa></span>SMS LOGS</a>
+    <div class="USSD" routerLinkActive="active">
+        <a class="link" [routerLink]="['/home/dashboard', {outlets: {outlet1: ['ussd-sessions']}}]">
+            <span>
+                <fa name="phone" size="lg"></fa>
+            </span>USSD
+        </a>
     </div>
     <hr>
     <button routerLink="/home" type="button" class="btn btn-primary" [ngStyle]="{'background-color': brandColor}"><fa name="arrow-left"></fa> Back Home </button>
