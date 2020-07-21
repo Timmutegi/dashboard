@@ -60,7 +60,8 @@ export class EnrolmentsComponent implements OnInit {
   }
 
   getEnrolments() {
-    this.api.get('Enrolments?filter={"include":"policyHolder"}').subscribe(
+    const ID = localStorage.getItem('partnerProductID');
+    this.api.get(`Enrolments?filter={"where":{"partnerProductId": "${ID}"}, "include": "policyHolder"}`).subscribe(
       res => {
         res.forEach((element: { enrolmentDate: string | number | Date; }) => {
           element.enrolmentDate = new Date(element.enrolmentDate);
