@@ -19,7 +19,6 @@ export class ProductsComponent implements OnInit {
   name: string;
   logo: string;
   brandColor: string;
-  partnerID: string;
 
   constructor(private api: ApiService, private router: Router, private errorHandler: ErrorHandlingService) { }
 
@@ -34,15 +33,15 @@ export class ProductsComponent implements OnInit {
         this.getAdminProfile(res.partnerId);
       },
       err => {
-        // console.log(err);
+        console.log(err);
         this.isLoading = false;
         this.errorHandler.handleError(err);
       }
     );
   }
 
-  getAdminProfile(partnerID: string) {
-    this.api.get(`Partners/${partnerID}`).subscribe(
+  getAdminProfile(partnerId: string) {
+    this.api.get(`Partners/${partnerId}`).subscribe(
       res => {
         this.name = res.name;
         this.logo = res.logo;
@@ -55,13 +54,12 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  getPartnerProducts(partnerID: string) {
-    console.log(partnerID);
-    this.api.get(`Partners/${partnerID}/partnerProducts`).subscribe(
+  getPartnerProducts(partnerId: string) {
+    this.api.get(`Partners/${partnerId}/partnerProducts`).subscribe(
       response => {
         console.log(response);
         this.products = response;
-        this.getInfo(partnerID);
+        this.getInfo(partnerId);
         this.isLoading = false;
       },
       err => {
