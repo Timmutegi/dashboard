@@ -6,7 +6,6 @@ import { ApiService } from '../../services/api.service';
 
 export interface Data {
   startDate: Date;
-  groupId: string;
 }
 
 const ELEMENT_DATA: Data[] = [];
@@ -20,7 +19,7 @@ export class PoliciesComponent implements OnInit {
   isLoading = true;
   minDate: Date;
   maxDate: Date;
-  groups: any = [];
+  individuals: any = [];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   displayedColumns: string[] = [
     'serial',
@@ -58,7 +57,6 @@ export class PoliciesComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.getPolicies();
-    this.test();
     this.maxDate = new Date();
     this.minDate = new Date(2019, 0, 1);
     this.dataSource.filterPredicate = (data, filter) => {
@@ -75,25 +73,17 @@ export class PoliciesComponent implements OnInit {
 
   getPolicies() {
     const ID = localStorage.getItem('partnerProductID');
-    this.api.get(`PartnerProducts/${ID}/policies?filter={"where":{"groupId": null}, "include": "policyHolder"}`).subscribe(
-      res => {
-        res.forEach((element: { startDate: string | number | Date; }) => {
-          element.startDate = new Date(element.startDate);
-        });
-        // console.log(res);
-        this.isLoading = false;
-        this.dataSource.data = res;
-      }
-    );
-  }
-
-  test() {
-    const ID = localStorage.getItem('partnerProductID');
-    this.api.get(`PartnerProducts/${ID}/policies?filter={"where":{"policyHolderId": null}, "include": "group"}`).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    this.api.get(`PartnerProducts/${ID}/policies?filter[include]=policyHolder&filter[include][group]=members`)
+    .subscribe((res) => {
+      res.forEach((element: { startDate: string | number | Date; policyHolderId: any; }) => {
+        element.startDate = new Date(element.startDate);
+        if (element.policyHolderId != null) {
+          this.individuals.push(element);
+        }
+      });
+      this.isLoading = false;
+      this.dataSource.data = this.individuals;
+    });
   }
 
   reset() {

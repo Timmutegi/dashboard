@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>Policies</h4>
+    <h4>Individual Policies</h4>
     <div class="mat-elevation-z8">
         <form [formGroup]="filterForm">
             <div class="date-block">
@@ -21,8 +21,7 @@
                 <button type="button" class="btn btn-info" (click)="reset()">
                     <fa name="retweet"></fa>
                 </button>
-                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Policies'})">Excel <fa
-                        name="download"></fa></button>
+                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Policies'})">Excel <fa name="download"></fa></button>
             </div>
         </form>
         <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0]">
@@ -93,3 +92,4 @@
         <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </div>
 </div>
+<app-group-policies></app-group-policies>
