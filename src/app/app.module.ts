@@ -29,7 +29,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnrolmentsComponent } from './components/enrolments/enrolments.component';
 import { CommissionsComponent } from './components/commissions/commissions.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { PolicyholderschartComponent } from './components/policyholderschart/policyholderschart.component';
 import { DatePipe } from '@angular/common';
 import { UssdSessionsComponent } from './components/ussd-sessions/ussd-sessions.component';
 import { PoliciesComponent } from './components/policies/policies.component';
@@ -49,7 +48,6 @@ import { GroupPoliciesComponent } from './group-policies/group-policies.componen
     EnrolmentsComponent,
     CommissionsComponent,
     FooterComponent,
-    PolicyholderschartComponent,
     UssdSessionsComponent,
     PoliciesComponent,
     GroupPoliciesComponent
