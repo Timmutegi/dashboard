@@ -34,6 +34,7 @@ import { DatePipe } from '@angular/common';
 import { UssdSessionsComponent } from './components/ussd-sessions/ussd-sessions.component';
 import { PoliciesComponent } from './components/policies/policies.component';
 import { HttpErrorInterceptor } from './interceptor/httpconfig.interceptor';
+import { GroupPoliciesComponent } from './group-policies/group-policies.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { HttpErrorInterceptor } from './interceptor/httpconfig.interceptor';
     FooterComponent,
     PolicyholderschartComponent,
     UssdSessionsComponent,
-    PoliciesComponent
+    PoliciesComponent,
+    GroupPoliciesComponent
   ],
   imports: [
     BrowserModule,
