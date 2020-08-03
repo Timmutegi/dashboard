@@ -1,1 +1,94 @@
-<p>group-policies works!</p>
+<div class="container">
+    <h4>Group Policies</h4>
+    <div class="mat-elevation-z8">
+        <form [formGroup]="filterForm">
+            <div class="date-block">
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="fromDate" placeholder="From Start Date" formControlName="fromDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput readonly [min]="minDate" [max]="maxDate" [matDatepicker]="toDate" placeholder="To Start Date" formControlName="toDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                        <mat-datepicker #toDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="applyFilter1()">Filter</button>
+                <button type="button" class="btn btn-info" (click)="reset()">
+                    <fa name="retweet"></fa>
+                </button>
+                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Policies'})">Excel <fa
+                        name="download"></fa></button>
+            </div>
+        </form>
+        <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" [hiddenColumns]="[0]">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef> No </th>
+                <td mat-cell *matCellDef="let policy; let i = index;"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef> Firstname </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.group.members[0].firstName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef> Lastname </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.group.members[0].lastName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone</th>
+                <td mat-cell *matCellDef="let policy"> {{policy.group.members[0].phoneNumber}} </td>
+            </ng-container>
+
+            <!-- Phone Column -->
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef> Start Date </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.startDate | date: 'shortDate'}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="count">
+                <th mat-header-cell *matHeaderCellDef> Group Members </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.group.count}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Group Type </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.group.type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="paid">
+                <th mat-header-cell *matHeaderCellDef> Amount Paid </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.paid}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Package </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.price}} </td>
+            </ng-container>
+
+            <!-- Created At Column -->
+            <ng-container matColumnDef="nextPaymentAmount">
+                <th mat-header-cell *matHeaderCellDef> Next Payment Amount </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.nextPaymentDueAmount}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <mat-spinner diameter="20" style="margin-top: 20px;"></mat-spinner>
+        </div>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
