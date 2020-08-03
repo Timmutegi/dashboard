@@ -66,7 +66,6 @@ export class CommissionsComponent implements OnInit {
         res.forEach((element: { createdAt: string | number | Date }) => {
           element.createdAt = new Date(element.createdAt);
         });
-        console.log(res);
         this.isLoading = false;
         this.dataSource.data = res;
       });

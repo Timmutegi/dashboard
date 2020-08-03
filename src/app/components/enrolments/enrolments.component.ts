@@ -66,7 +66,6 @@ export class EnrolmentsComponent implements OnInit {
         res.forEach((element: { enrolmentDate: string | number | Date; }) => {
           element.enrolmentDate = new Date(element.enrolmentDate);
         });
-        console.log(res);
         this.isLoading = false;
         this.dataSource.data = res;
       }
