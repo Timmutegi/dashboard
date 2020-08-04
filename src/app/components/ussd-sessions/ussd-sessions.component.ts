@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { ExportType } from 'mat-table-exporter';
 
 export interface Data {
   createdAt: Date;
@@ -16,6 +17,7 @@ const ELEMENT_DATA: Data[] = [];
   styleUrls: ['./ussd-sessions.component.scss']
 })
 export class UssdSessionsComponent implements OnInit {
+  exportType = ExportType.XLSX;
   isLoading = true;
   minDate: Date;
   maxDate: Date;
