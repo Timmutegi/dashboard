@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ExportType } from 'mat-table-exporter';
 
 export interface Data {
   createdAt: Date;
@@ -16,6 +17,7 @@ const ELEMENT_DATA: Data[] = [];
   styleUrls: ['./commissions.component.scss']
 })
 export class CommissionsComponent implements OnInit {
+  exportType = ExportType.XLSX;
   isLoading = true;
   minDate: Date;
   maxDate: Date;

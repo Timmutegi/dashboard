@@ -21,7 +21,7 @@
                 <button type="button" class="btn btn-info" (click)="reset()">
                     <fa name="retweet"></fa>
                 </button>
-                <button type="button" class="btn btn-success" (click)="exporter.exportTable({ExportType: 'xlsx'}, {fileName: 'Commissions'})">Excel 
+                <button type="button" class="btn btn-success" (click)="exporter.exportTable(exportType, {fileName: 'Commissions'})">Excel 
                     <fa name="download"></fa>
                 </button>
             </div>
